@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mascotas</title>
+</head>
+<body class="bg-[#adcce9]">
+
+    <!-- component -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+    <div class="text-center pb-12">
+        <h1 class="font-bold text-3xl md:text-4xl lg:text-5xl font-heading text-gray-900">
+            Mascotas
+        </h1>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% if mascotas %}
+        {% for mascota in mascotas %}
+        <a href="{{ url_for('chatasinc', id=mascota.id) }}">
+            <div class="w-full bg-white rounded-lg p- flex flex-col justify-center items-center">
+                <div class="mb-8">
+                    <img class="object-center object-cover rounded-full h-36 w-36" src="https://scontent.fasu6-2.fna.fbcdn.net/v/t39.30808-6/292972508_441778954626468_4376948901867490494_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=NDywwloxnQcAX-VZUIK&_nc_ht=scontent.fasu6-2.fna&oh=00_AfB4_BrOCfB0AekgTglVTF7-_Gxu609iQ1bem3OwVOEktQ&oe=64A1309B" alt="photo">
+                </div>
+                <div class="text-center m-3 ">
+                    <p class="text-xl text-gray-700 font-bold mb-2">{{ mascota.nombre }}</p>
+                    <p class="text-base text-gray-400 font-normal">Edad: {{ mascota.edad }}</p>
+                    <p class="text-base text-gray-400 font-normal mb-2 ">Raza: {{ mascota.raza }}</p>
+                    <a href="{{ url_for('edit', id=mascota.id) }}" class="rounded-full bg-[#adcce9] m-3 p-2" >Editar</a>
+                    <a href="{{ url_for('delete', id=mascota.id) }}" class="rounded-full bg-[#adcce9] m-3 p-2" >Eliminar</a>
+                    <a href="{{ url_for('chatasinc', id=mascota.id) }}"class="rounded-full bg-[#adcce9] m-3 p-2">chat</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        <button><a href="{{ url_for('menu') }}"><h2>Atras</h2></a></button>
+    </div>
+</section>
+</body>
+</html>

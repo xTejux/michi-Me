@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mascotas</title>
+</head>
+<body>
+	<h1>Mascotas</h1>
+	<form method="POST" action="{{ url_for('registro') }}">
+	<!-- el csrf token sirve para  -->
+		{{ form.csrf_token }}
+		{{ form.nombre.label }} {{ form.nombre }} <br>
+		{{ form.raza.label }} {{ form.raza }} <br>
+		{{ form.edad.label }} {{ form.edad }} <br>
+		{{ form.peso.label }} {{ form.peso }} <br>
+		{{ form.nivel_de_actividad.label }} {{ form.nivel_de_actividad }} <br>
+		{{ form.entorno.label }} {{ form.entorno }} <br>
+		{{ form.submit() }}
+	</form>
+	<a href="{{ url_for('registrar_gato') }}"><h1>Registrar gatoo</h1></a>
+
+	{% if mascotas %}
+			{% for mascota in mascotas %}
+			<p>{{ mascota.nombre }} -  {{ mascota.raza }}  -  {{ mascota.edad }}       <a href="{{ url_for('edit', id=mascota.id) }}">Editar</a> - <a href="{{ url_for('delete', id=mascota.id) }}">Eliminar</a></p>
+			<a href="{{ url_for('chatasinc', id=mascota.id) }}">chat ia</a>
+		  {% endfor %}
+		</ul>
+	{% endif %}
+</body>
+</html>
+

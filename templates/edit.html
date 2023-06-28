@@ -1,0 +1,13 @@
+<h1>Editar tarea</h1>
+<form method="POST" action="{{ url_for('edit', id=mascota.id) }}">
+    {{ form.csrf_token }}
+    {{ form.nombre.label }} {{ form.nombre }} <br>
+    {{ form.raza.label }} {{ form.raza }} <br>
+    {{ form.peso.label }} {{ form.peso }} <br>
+    {{ form.edad.label }} {{ form.edad }} <br>
+    {{ form.nivel_de_actividad.label }} {{ form.nivel_de_actividad }} <br>
+    {{ form.entorno.label }} {{ form.entorno }} <br>
+    {{ form.submit() }}
+
+  <button type="submit">Guardar</button>
+</form>

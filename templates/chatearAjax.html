@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{nombre}}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+
+      <main id="main">
+        <div class="chat-box-container">
+          <h1 class="chat-box-header">Chat - {{nombre}}</h1>
+          <div class="chat-box">
+      
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input class="chat-input" type="text" name="chat-input" value="">
+          <button class="chat-submit" type="button" name="submit">Submit</button>
+        </div>
+        <p id="miParrafo" style="display: none;">{{id}}</p>
+      </main>
+
+<style>body {
+    margin: 0;
+    font-family: sans-serif;
+    -ms-overflow-style: scrollbar;
+    overflow-style: scrollbar;
+    background-color: #DDD;
+  }
+  
+  main {
+    max-width: 700px;
+    margin: auto;
+    height: 100vh;
+    background-color: #DDD;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-box-container {
+    background-color: #adcce9;
+    margin: 0;
+    border-radius: 10px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 0;
+  }
+  
+  .chat-box-header {
+    display: block;
+    text-align: center;
+  }
+  
+  .chat-box {
+    margin: 4px 4px 4px 4px;
+    border-radius: 10px;
+    border: 2px ;
+    flex-grow: 1;
+    background-color: #FFF;
+    overflow-y: scroll;
+  }
+  
+  .chat-box p {
+    margin: 0;
+    padding: 6px;
+    font-size: 26px;
+  }
+  
+  .ai-person-container {
+    display: block;
+    overflow: auto;
+  }
+  
+  .ai,
+  .person {
+    overflow: auto;
+    margin: 4px;
+    border: 2px solid black;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  
+  .ai {
+    background-color: #69AAFF;
+    text-align: left;
+    margin-right: 36px;
+    border-color: #69aaff;
+    float: left;
+    border-bottom-left-radius: 0px;
+  }
+  
+  .person {
+    background-color: #adcce9 ;
+    text-align: left;
+    margin-left: 36px;
+    float: right;
+    border-bottom-right-radius: 0px;
+    border: #adcce9;
+  }
+  
+  .ai-date,
+  .person-date {
+    font-size: 10px;
+    clear: both;
+  }
+  
+  .ai-date {
+    float: left;
+    margin-left: 6px;
+  }
+  
+  .person-date {
+    float: right;
+    margin-right: 6px;
+  }
+  
+  .chat-input-container {
+    background-color: #adcce9;
+    position: relative;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+  }
+  
+  .chat-input {
+    height: 40px;
+    width: 50px;
+    display: inline-block;
+    flex-grow: 1;
+    padding: 2px 2px 2px 2px;
+    margin: 0 4px 0 4px;
+    font-size: 32px;
+    border: 2px ;
+    border-radius: 10px;
+  }
+  
+  .chat-input:focus {
+    outline: 0;
+  }
+  
+  .chat-submit {
+    width: 70px;
+    height: 47px !important;
+    padding: 2px 2px 2px 2px;
+    margin-right: 4px;
+    border: 2px ;
+    border-radius: 20px;
+    background-color: #69AAFF;
+    font-size: 18px;
+  }
+  
+  .chat-submit:hover {
+    cursor: pointer;
+    background-color: #80BBFF;
+  }
+  
+  .chat-submit:focus {
+    outline: 0;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .chat-box p {
+      font-size: 30px;
+    }
+    .chat-input {
+      width: 60%;
+      float: left;
+      font-size: 28px;
+    }
+    .chat-submit {
+      float: right;
+    }
+  }</style>
+  <script>document.addEventListener("DOMContentLoaded", function() {
+    // Tu código JavaScript aquí
+    (function() {
+      "use strict";
+      var message = ''
+      const submit = document.querySelector(".chat-submit");
+      const chatBox = document.querySelector(".chat-box");
+      const chatInput = document.querySelector(".chat-input");
+    
+      function chatTemplate(aiOrPerson) {
+        if (aiOrPerson.text === "undefined") {
+          return ""; // No se imprime nada si el texto es "undefined"
+        }
+    
+        return (
+          `
+            <div class="ai-person-container">
+              <div class="${aiOrPerson.class}">
+                <p>${aiOrPerson.text}</p>
+              </div>
+              <span class="${aiOrPerson.class}-date">${aiOrPerson.date}</span>
+            </div>
+          `
+        );
+      }
+    
+      submit.addEventListener("click", function(e) {
+        appendChatBox(true);
+      });
+    
+      document.addEventListener("keypress", function(e) {
+        if (e.keyCode == "13") {
+          appendChatBox(true);
+        }
+      });
+    
+      function appendChatBox(fromPerson) {
+        const date = new Date();
+        if (!fromPerson) {
+          date.setSeconds(date.getSeconds() + 2);
+        }
+        if (fromPerson && !chatInput.value.trim()) {
+          return;
+        }
+        const timestamp = date.toLocaleTimeString();
+        const newChatDiv = chatTemplate({
+          class: fromPerson ? "person" : "ai",
+          text: fromPerson ? chatInput.value.trim() : aiResponse(),
+          date: timestamp
+        });
+        if (!fromPerson) {
+          setTimeout(function() {
+            chatBox.innerHTML += newChatDiv;
+            chatBox.scrollTop = chatBox.scrollHeight;
+          }, 2000);
+        } else {
+          chatBox.innerHTML += newChatDiv;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        if (fromPerson) {
+          message = chatInput.value
+          chatInput.value = "";
+          appendChatBox(false);
+        }
+      }
+    
+      function aiResponse() {
+
+        var animal = document.getElementById("miParrafo").innerHTML;
+        console.log(message)
+        $.ajax({
+          url: '/send_message/' + animal,
+          type: 'POST',
+          data: { message: message },
+          success: function(response) {
+            if (response && response.message && response.message.trim() !== "") {
+              const aiResponseText = response.message;
+              if (aiResponseText !== "undefined") { // Validación para evitar "undefined"
+                const aiResponseDiv = chatTemplate({
+                  class: 'ai',
+                  text: aiResponseText,
+                  date: new Date().toLocaleTimeString()
+                });
+                chatBox.innerHTML += aiResponseDiv;
+                chatBox.scrollTop = chatBox.scrollHeight;
+              }
+            } else {
+              console.error('La respuesta recibida no contiene un mensaje válido');
+            }
+          },
+          error: function(error) {
+            console.error('Error al enviar el mensaje:', error);
+          }
+        });
+      }
+    })();
+  });
+
+</script>
+</body>
+</html>

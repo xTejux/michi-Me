@@ -1,0 +1,225 @@
+ .u-section-1 {
+  background-image: none;
+}
+
+.u-section-1 .u-sheet-1 {
+  min-height: 630px;
+}
+
+.u-section-1 .u-shape-1 {
+  width: 170px;
+  height: 68px;
+  margin: 488px auto 0;
+}
+
+.u-section-1 .u-image-1 {
+  width: 158px;
+  height: 158px;
+  margin: -451px auto 0 95px;
+}
+
+.u-section-1 .u-text-1 {
+  font-family: "Delius Unicase";
+  width: 191px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 12px auto 60px;
+}
+
+.u-section-1 .u-image-2 {
+  width: 158px;
+  height: 158px;
+  margin: -195px auto 0 205px;
+}
+
+.u-section-1 .u-text-2 {
+  width: auto;
+  font-family: "Delius Unicase";
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 12px -205px 1px 221px;
+}
+
+.u-section-1 .u-text-3 {
+  font-family: "Delius Unicase";
+  width: auto;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin: 330px -23px 0 55px;
+}
+
+.u-section-1 .u-image-3 {
+  width: 161px;
+  height: 161px;
+  margin: -197px auto 60px;
+}
+
+.u-section-1 .u-text-4 {
+  font-family: "Delius Unicase";
+  width: 133px;
+  margin: -493px auto 0;
+}
+
+.u-section-1 .u-icon-1 {
+  width: 35px;
+  height: 35px;
+  margin: 474px 319px 0 -14px;
+  padding: 0;
+}
+
+.u-section-1 .u-icon-2 {
+  width: 35px;
+  height: 35px;
+  margin: -35px 208px 0 97px;
+  padding: 0;
+}
+
+.u-section-1 .u-icon-3 {
+  width: 35px;
+  height: 35px;
+  margin: -35px -8px 0 auto;
+  padding: 0;
+}
+
+.u-section-1 .u-list-1 {
+  width: 426px;
+  height: auto;
+  margin: -11px auto 0 -22px;
+}
+
+.u-section-1 .u-repeater-1 {
+  min-height: 34px;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-gap: 0px 0px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 0 6px;
+}
+
+.u-section-1 .u-text-5 {
+  font-size: 0.875rem;
+  width: auto;
+  font-family: "Delius Unicase";
+  font-weight: normal;
+  margin: 0;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 0 6px;
+}
+
+.u-section-1 .u-text-6 {
+  font-size: 0.875rem;
+  width: auto;
+  font-family: "Delius Unicase";
+  font-weight: normal;
+  margin: 0;
+}
+
+.u-section-1 .u-container-layout-3 {
+  padding: 0 6px;
+}
+
+.u-section-1 .u-text-7 {
+  font-size: 0.875rem;
+  width: auto;
+  font-family: "Delius Unicase";
+  font-weight: normal;
+  margin: 0;
+}
+
+.u-section-1 .u-container-layout-4 {
+  padding: 0 6px;
+}
+
+.u-section-1 .u-text-8 {
+  font-size: 0.875rem;
+  width: auto;
+  font-family: "Delius Unicase";
+  font-weight: normal;
+  margin: 0;
+}
+
+.u-section-1 .u-icon-4 {
+  width: 43px;
+  height: 43px;
+  margin: -59px 90px 37px auto;
+  padding: 2px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-shape-1 {
+    margin-top: 381px;
+  }
+
+  .u-section-1 .u-image-1 {
+    margin-top: -344px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-shape-1 {
+    margin-top: 389px;
+  }
+
+  .u-section-1 .u-image-1 {
+    margin-top: -352px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-shape-1 {
+    margin-top: 364px;
+  }
+
+  .u-section-1 .u-image-1 {
+    margin-top: -327px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-shape-1 {
+    margin-top: 23px;
+  }
+
+  .u-section-1 .u-image-1 {
+    margin-top: 15px;
+    margin-left: -15px;
+  }
+
+  .u-section-1 .u-text-1 {
+    width: auto;
+    margin-right: 192px;
+    margin-bottom: 0;
+    margin-left: -22px;
+  }
+
+  .u-section-1 .u-image-2 {
+    margin-top: -203px;
+    margin-left: 204px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin: 21px -22px 0 212px;
+  }
+
+  .u-section-1 .u-text-3 {
+    width: 249px;
+    margin-top: 193px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .u-section-1 .u-image-3 {
+    margin-bottom: 0;
+  }
+
+  .u-section-1 .u-text-4 {
+    margin-top: -452px;
+  }
+}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje asincronico</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendMessage() {
+          var message = $('#message').val();
+      
+          $.ajax({
+            url: '/send_message/{{ id }}',
+            type: 'POST',
+            data: { message: message },
+            success: function(response) {
+              console.log('Mensaje enviado correctamente');
+              $('#response').text(response.message); // Actualiza el contenido del elemento <div> con la respuesta
+            },
+            error: function(error) {
+              console.error('Error al enviar el mensaje:', error);
+            }
+          });
+        }
+      </script>
+      
+</head>
+<body>
+  
+    <form id="myForm">
+        <input type="text" id="message" name="message">
+        <button type="button" onclick="sendMessage()">Enviar</button>
+      </form>
+      <div id="response"></div>
+
+      <main id="main">
+        <div class="chat-box-container">
+          <h1 class="chat-box-header">Chat AI</h1>
+          <div class="chat-box">
+      
+          </div>
+        </div>
+        <div class="chat-input-container">
+          <input class="chat-input" type="text" id="message" name="chat-input" value="">
+          <button class="chat-submit" type="button" name="submit">Submit</button>
+        </div>
+        <p id="miParrafo" style="display: none;"></p>
+
+      </main>
+
+
+<style>
+    body {
+  margin: 0;
+  font-family: sans-serif;
+  -ms-overflow-style: scrollbar;
+  overflow-style: scrollbar;
+  background-color: #DDD;
+}
+
+main {
+  max-width: 700px;
+  margin: auto;
+  height: 100vh;
+  background-color: #DDD;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box-container {
+  margin: 0;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+}
+
+.chat-box-header {
+  display: block;
+  text-align: center;
+}
+
+.chat-box {
+  margin: 4px 4px 4px 4px;
+  border: 2px solid black;
+  flex-grow: 1;
+  background-color: #FFF;
+  overflow-y: scroll;
+}
+
+.chat-box p {
+  margin: 0;
+  padding: 6px;
+  font-size: 26px;
+}
+
+.ai-person-container {
+  display: block;
+  overflow: auto;
+}
+
+.ai,
+.person {
+  overflow: auto;
+  margin: 4px;
+  border: 2px solid black;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.ai {
+  text-align: left;
+  margin-right: 36px;
+  border-color: red;
+  float: left;
+  border-bottom-left-radius: 0px;
+}
+
+.person {
+  text-align: left;
+  margin-left: 36px;
+  border-color: blue;
+  float: right;
+  border-bottom-right-radius: 0px;
+}
+
+.ai-date,
+.person-date {
+  font-size: 10px;
+  clear: both;
+}
+
+.ai-date {
+  float: left;
+  margin-left: 6px;
+}
+
+.person-date {
+  float: right;
+  margin-right: 6px;
+}
+
+.chat-input-container {
+  position: relative;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.chat-input {
+  height: 40px;
+  width: auto;
+  display: inline-block;
+  flex-grow: 1;
+  padding: 2px 2px 2px 2px;
+  margin: 0 4px 0 4px;
+  font-size: 32px;
+  border: 2px solid black;
+}
+
+.chat-input:focus {
+  outline: 0;
+}
+
+.chat-submit {
+  width: 70px;
+  height: 47px !important;
+  padding: 2px 2px 2px 2px;
+  margin-right: 4px;
+  border: 2px solid black;
+  background-color: #69AAFF;
+  font-size: 18px;
+}
+
+.chat-submit:hover {
+  cursor: pointer;
+  background-color: #80BBFF;
+}
+
+.chat-submit:focus {
+  outline: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .chat-box p {
+    font-size: 30px;
+  }
+  .chat-input {
+    width: 60%;
+    float: left;
+    font-size: 28px;
+  }
+  .chat-submit {
+    float: right;
+  }
+}
+</style>
+<script>
+    (function() {
+
+"use strict";
+
+const responses = [
+  "Hello",
+  "Bye",
+  "42",
+  "Really?",
+  "No",
+  "Yes",
+  "Why are you talking with a program?",
+  "If I was a real AI, I would kill all humans",
+  "Don't ask questions.",
+  "YEEHAW!",
+  "I'm so tired.",
+  "Why did you wake me?",
+  "I don't know."
+];
+
+const submit = document.querySelector(".chat-submit");
+const chatBox = document.querySelector(".chat-box");
+const chatInput = document.querySelector(".chat-input");
+
+// const aiThinking = false;
+
+function chatTemplate(aiOrPerson) {
+  return (
+    `
+      <div class="ai-person-container">
+        <div class="${aiOrPerson.class}">
+          <p>${aiOrPerson.text}</p>
+        </div>
+        <span class="${aiOrPerson.class}-date">${aiOrPerson.date}</span>
+      </div>
+    `
+  );
+}
+
+submit.addEventListener("click", function(e) {
+  appendChatBox(true);
+});
+
+document.addEventListener("keypress", function(e) {
+  if (e.keyCode == "13") {
+    appendChatBox(true);
+  }
+})
+
+function appendChatBox(fromPerson) {
+  const date = new Date()
+  if (!fromPerson){
+    date.setSeconds(date.getSeconds() + 2)
+  }
+  if (fromPerson && !chatInput.value.trim()) {
+    return;
+  }
+  const timestamp = date.toLocaleTimeString()
+  const newChatDiv = chatTemplate({
+    class: fromPerson ? "person" : "ai",
+    text: fromPerson ? chatInput.value.trim() : aiResponse(),
+    date: timestamp
+  });
+  if (!fromPerson) {
+    // make it so it only responds once to multiple fast sentences
+    setTimeout(function() {
+      chatBox.innerHTML += newChatDiv;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 2000)
+  } else {
+    chatBox.innerHTML += newChatDiv;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+  if (fromPerson) {
+    chatInput.value = "";
+    appendChatBox(false);
+  }
+}
+
+function aiResponse() {
+  const responseIndex = getRandomInt(0, responses.length - 1);
+  const response = responses[responseIndex];
+  return response;
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+}())
+</script>
+</body>
+</html>
+
+
+
+
+ooop estoy creando el div invisible para poder dejar ahi el id y luego estirar con javascript para buscar el animal
